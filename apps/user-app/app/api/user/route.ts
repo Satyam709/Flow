@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import client from "@repo/db/client2";
+import client from "@repo/db/client";
 
 export const GET = async () => {
     console.log("adding ...");

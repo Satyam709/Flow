@@ -1,8 +1,9 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
-import db from "@repo/db/client2";
+import db from "@repo/db/client";
 import { NextURL } from "next/dist/server/web/next-url";
+
 
 export const authOptions = {
   providers: [
@@ -16,18 +17,20 @@ export const authOptions = {
         },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
+      async authorize(credentials):Promise<any> {
         console.log(credentials);
+
+        if (!credentials)return null;
         
         const existingUser = await db.user.findFirst({
           where: {
-            number: credentials?.phone,
+            number: credentials.phone,
           },
         });
 
         if (existingUser) {
           const passwordValidation = await bcrypt.compare(
-            credentials?.password,
+            credentials.password,
             existingUser.password
           );
 
@@ -49,8 +52,8 @@ export const authOptions = {
            const newUser =  await db.user.create(
             {
                 data:{
-                    password:hasedPass|| "3",
-                    number:credentials?.phone || "3"
+                    password:hasedPass,
+                    number:credentials?.phone
                 }
             }
            );
@@ -65,9 +68,10 @@ export const authOptions = {
   ],
   callbacks: {
     async redirect({ url, baseUrl }:{url:NextURL,baseUrl:NextURL}) {
-      // Redirect to localhost:3000 after sign-in
       
+      // Redirect to localhost:3000 after sign-in
       return baseUrl+"/success"; // or return 'http://localhost:3000' to hardcode the URL
+
     },
     async session({ session, token }) {
       session.user.id = token.id;
