@@ -1,10 +1,12 @@
 "use client";
-import React from "react";
+
 import { Button } from "./button";
 import { LogOut } from "lucide-react";
 
 interface AppBarProps {
   isLoggedIn: boolean;
+  onSignOut: () => void;
+  onSignin : ()=> void;
 }
 
 function AppBar(props: AppBarProps) {
@@ -16,9 +18,9 @@ function AppBar(props: AppBarProps) {
       </h2>
       <div>
         {props.isLoggedIn ? (
-          <Button className="text-accent-2 flex gap-2 items-center">Logout <LogOut></LogOut></Button>
+          <Button className="text-red-600 flex gap-2 items-center" onClick={props.onSignOut}>Logout <LogOut></LogOut></Button>
         ) : (
-          <Button>Login</Button>
+          <Button onClick={props.onSignin}>Login</Button>
         )}
       </div>
     </div>

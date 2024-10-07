@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Providers } from "./providers";
-import AppBar from "@repo/ui/appbar";
-import { session } from "../lib/getSession";
+import AppbarClient from "../components/AppbarClient";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -28,7 +27,7 @@ export default function RootLayout({
     <html lang="en">
       <Providers>
         <body className="min-h-screen flex flex-col bg-bg-main font-sans text-text-primary">
-          <AppBar isLoggedIn={session ? true : false} />
+          <AppbarClient/>
           {children}
         </body>
       </Providers>
