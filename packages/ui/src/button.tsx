@@ -11,7 +11,7 @@ interface ButtonProps {
 export const Button = ({ children, className,onClick }: ButtonProps) => {
   return (
     <button
-      className={className}
+      className={"bg-button-primary px-2 py-1 font-semibold text-button-text hover:bg-button-hover  rounded-sm "+ className}
       onClick={onClick}
     >
       {children}

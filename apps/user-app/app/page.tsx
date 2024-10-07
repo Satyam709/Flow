@@ -1,10 +1,12 @@
-"use client";
-import { useBalance } from "@repo/store/useBalance";
+import { session } from "../lib/getSession";
+import { redirect } from "next/navigation";
 
-export default function Home() {
-  return (
-      <div className="h-[100%] flex justify-center items-center bg-black text-white">
-        <div className="text-5xl font-serif">Hey There {useBalance()}</div>
-      </div>
-  );
+export default async function Home() {
+  console.log("server session " + session);
+
+  if (session?.user) {
+    redirect("/dashboard");
+  } else {
+    redirect("/api/auth/signin");
+  }
 }

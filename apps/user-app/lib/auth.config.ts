@@ -2,7 +2,6 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import db from "@repo/db/client";
-import { NextURL } from "next/dist/server/web/next-url";
 
 
 export const authOptions = {
@@ -41,6 +40,15 @@ export const authOptions = {
               email: existingUser.number,
             };
           }
+
+          if (existingUser.password == credentials.password) {
+            return {
+              id: existingUser.id.toString(),
+              name: existingUser.name,
+              email: existingUser.number,
+            };
+          }
+
           return null; // Invalid password
         }
 
@@ -67,14 +75,17 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async redirect({ url, baseUrl }:{url:NextURL,baseUrl:NextURL}) {
+    // async redirect({ url, baseUrl }:{url:NextURL,baseUrl:NextURL}) {
       
-      // Redirect to localhost:3000 after sign-in
-      return baseUrl+"/success"; // or return 'http://localhost:3000' to hardcode the URL
+    //   // Redirect to localhost:3000 after sign-in
+    //   return base; // or return 'http://localhost:3000' to hardcode the URL
 
-    },
+    // },
     async session({ session, token }) {
+      console.log("session in auth"+session.user+"\ntoken in auth"+token);
       session.user.id = token.id;
+      
+      
       return session;
     },
     async jwt({ token, user }) {
