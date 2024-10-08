@@ -5,6 +5,7 @@ import { Button } from "@repo/ui/button";
 import AddMoneyCard from "../../../components/AddMoneyCard";
 import BalanceCard from "../../../components/BalanceCard";
 import RecentTransactions from "../../../components/RecentTransactionCard";
+import BalanceClient from "../../../components/BalanceClient";
 
 const transactions = [
   { id: 1, status: "Completed", date: "2024-10-08", amt: 200 },
@@ -21,11 +22,7 @@ function Transfer() {
           <AddMoneyCard></AddMoneyCard>
         </div>
         <div className="flex-1 flex flex-col gap-4">
-          <BalanceCard
-            unblockedBalance={1500}
-            lockedBalance={500}
-            totalBalance={2000}
-          />
+          <BalanceClient></BalanceClient>
           <RecentTransactions recents={transactions} />
         </div>
       </div>

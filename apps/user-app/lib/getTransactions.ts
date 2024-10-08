@@ -1,8 +1,8 @@
 import prisma from "@repo/db/client";
 
-export default function getTransactions({ userId }: props) {
+export default async function getTransactions({ userId }: props) {
   try {
-    const transactions = prisma.onRampTransaction.findMany({
+    const transactions =await prisma.onRampTransaction.findMany({
       where: {
         userId: Number(userId),
       },
@@ -19,3 +19,4 @@ export default function getTransactions({ userId }: props) {
 interface props {
   userId: number | string;
 }
+

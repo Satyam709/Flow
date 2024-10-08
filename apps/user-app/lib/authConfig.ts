@@ -74,7 +74,7 @@ const authOptions: AuthOptions = {
   callbacks: {
     async session({ session, token }) {
       // console.log("session in auth", session.user, "\ntoken in auth", token);
-
+      
       if (token?.id) {
         session.user.id = token.id;
       }
