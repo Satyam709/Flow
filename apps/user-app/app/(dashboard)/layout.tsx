@@ -1,10 +1,12 @@
 import { SidebarItem } from "../../components/SideBar";
+import { Redirect } from "next";
 
 export default function Layout({
   children,
 }: {
   children: React.ReactNode;
 }): JSX.Element {
+
   return (
     <div className="flex flex-grow">
       <aside className="w-64 border-r border-gray-800  mr-4 pt-28 flex flex-col gap-4 px-4">

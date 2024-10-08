@@ -1,8 +1,6 @@
-import { DefaultSession, getServerSession } from "next-auth";
+import { getServerSession } from "next-auth";
 import authOptions from "./authConfig";
 
-export async function getSession(){
-  console.log(authOptions);
-  
+export async function getSession() {
   return await getServerSession(authOptions);
 }

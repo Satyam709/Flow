@@ -6,16 +6,17 @@ import authOptions from "../lib/authConfig";
 import { redirect } from "next/navigation";
 
 export default async function Home() {
-
-  console.log(authOptions);
+  console.log(" i m at home ");
   
-  const session = await getServerSession(authOptions); // Await here to get the session
+  const session = await getSession();
 
-  console.log("server session: ", session);
-  console.log("server session user- ", session?.user);
+  // const session = await getServerSession(authOptions); // Await here to get the session
+
+  console.log("\nsession :\n" + session?.user);
   if (session?.user) {
     redirect("/dashboard");
   } else {
     redirect("/api/auth/signin");
   }
+
 }

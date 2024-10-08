@@ -2,13 +2,16 @@
 import { signOut, signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
 
-import Router from "next/router";
+import { useRouter } from "next/navigation";
 
 import AppBar from "@repo/ui/appbar";
 
-const signout = () => {
-  signOut();
-  Router.push("/");
+const  signout = async () => {
+  await signOut();
+  console.log("going /");
+  
+  const router = useRouter();
+  router.push("/");
 };
 
 function AppbarClient() {

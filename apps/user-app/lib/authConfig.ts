@@ -17,7 +17,7 @@ const authOptions: AuthOptions = {
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials): Promise<any> {
-        console.log(credentials);
+        // console.log(credentials);
 
         if (!credentials) return null;
 
@@ -54,7 +54,7 @@ const authOptions: AuthOptions = {
 
         try {
           const hashedPass = await bcrypt.hash(credentials?.password, 10);
-          console.log(hashedPass);
+          //console.log(hashedPass);
 
           const newUser = await db.user.create({
             data: {
@@ -73,13 +73,13 @@ const authOptions: AuthOptions = {
   ],
   callbacks: {
     async session({ session, token }) {
-      console.log("session in auth", session.user, "\ntoken in auth", token);
+      // console.log("session in auth", session.user, "\ntoken in auth", token);
 
       if (token?.id) {
         session.user.id = token.id;
       }
 
-      console.log("Session after callback", session);
+      // console.log("Session after callback", session);
 
       return session;
     },
@@ -90,7 +90,7 @@ const authOptions: AuthOptions = {
       return token;
     },
   },
-  secret:"secretop"
+  secret: "secretop",
 };
 
 export default authOptions;
