@@ -1,15 +1,15 @@
 import { SidebarItem } from "../../components/SideBar";
-import { Redirect } from "next";
+import IsAuthenticated from "../../components/isAuthenticated";
 
-export default function Layout({
+export default async function Layout({
   children,
 }: {
   children: React.ReactNode;
-}): JSX.Element {
-
+}) {
   return (
     <div className="flex flex-grow">
       <aside className="w-64 border-r border-gray-800  mr-4 pt-28 flex flex-col gap-4 px-4">
+        {/* <IsAuthenticated></IsAuthenticated> */}
         <SidebarItem href={"/dashboard"} icon={<HomeIcon />} title="Home" />
         <SidebarItem
           href={"/transfer"}

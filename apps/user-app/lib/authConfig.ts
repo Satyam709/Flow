@@ -20,6 +20,10 @@ const authOptions: AuthOptions = {
         // console.log(credentials);
 
         if (!credentials) return null;
+        
+        if (!credentials.password || !credentials.phone) {
+          return null;
+        }
 
         const existingUser = await db.user.findFirst({
           where: {

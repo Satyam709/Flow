@@ -5,8 +5,8 @@ import { LogOut } from "lucide-react";
 
 interface AppBarProps {
   isLoggedIn: boolean;
-  onSignOut: () => void;
-  onSignin : ()=> void;
+  onsignout: () => void;
+  onsignin : ()=> void;
 }
 
 function AppBar(props: AppBarProps) {
@@ -18,9 +18,9 @@ function AppBar(props: AppBarProps) {
       </h2>
       <div>
         {props.isLoggedIn ? (
-          <Button className="text-red-600 flex gap-2 items-center" onClick={props.onSignOut}>Logout <LogOut></LogOut></Button>
+          <Button className="text-red-600 flex gap-2 items-center" onClick={props.onsignout}>Logout <LogOut></LogOut></Button>
         ) : (
-          <Button onClick={props.onSignin}>Login</Button>
+          <Button onClick={props.onsignin}>Login</Button>
         )}
       </div>
     </div>

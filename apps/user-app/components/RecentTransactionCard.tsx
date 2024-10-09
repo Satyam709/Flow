@@ -2,18 +2,18 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Card } from "@repo/ui/card";
 
-interface Transaction {
-  id: number;
-  status: string;
-  date: string;
-  amt: string | number;
-}
+// interface Transaction {
+//   id: number;
+//   status: string;
+//   date: string;
+//   amt: string | number;
+// }
 
-interface RecentTransactionsProps {
-  recents: Transaction[];
-}
+// interface RecentTransactionsProps {
+//   recents: Transaction[];
+// }
 
-function RecentTransactions({ recents }: RecentTransactionsProps) {
+function RecentTransactions({ recents }: any) {
   return (
     <Card title="Recent Transactions" className="">
       {recents.length > 0 ? (
@@ -28,11 +28,11 @@ function RecentTransactions({ recents }: RecentTransactionsProps) {
                   {transaction.status}
                 </span>
                 <span className="text-gray-500 text-sm">
-                  {transaction.date}
+                  {new Date(transaction.startTime).toDateString()}
                 </span>
               </div>
               <div>
-                <span>{transaction.amt}</span>
+                <span>{transaction.amount/100}</span>
               </div>
             </div>
           </div>
@@ -46,15 +46,15 @@ function RecentTransactions({ recents }: RecentTransactionsProps) {
   );
 }
 
-RecentTransactions.propTypes = {
-  recents: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      status: PropTypes.string.isRequired,
-      date: PropTypes.string.isRequired,
-      amt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    })
-  ).isRequired,
-};
+// RecentTransactions.propTypes = {
+//   recents: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       status: PropTypes.string.isRequired,
+//       date: PropTypes.string.isRequired,
+//       amt: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+//     })
+//   ).isRequired,
+// };
 
 export default RecentTransactions;

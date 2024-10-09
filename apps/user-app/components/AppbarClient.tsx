@@ -1,27 +1,21 @@
 "use client";
 import { signOut, signIn } from "next-auth/react";
 import { useSession } from "next-auth/react";
-
-import { useRouter } from "next/navigation";
-
 import AppBar from "@repo/ui/appbar";
-
-const  signout = async () => {
-  await signOut();
-  console.log("going /");
-  
-  const router = useRouter();
-  router.push("/");
-};
 
 function AppbarClient() {
   const session = useSession();
+
+  const signout = async () => {
+    await signOut({callbackUrl:"/"});
+  };
+
   return (
     <AppBar
-      onSignOut={signout}
-      onSignin={signIn}
-      isLoggedIn={session.status == "authenticated"}
-    ></AppBar>
+      onsignout={signout}
+      onsignin={signIn}
+      isLoggedIn={session.status === "authenticated"}
+    />
   );
 }
 
